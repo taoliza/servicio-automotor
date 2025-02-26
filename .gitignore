@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Ignorar archivos de H2 (base de datos en memoria)
+*.h2.db
