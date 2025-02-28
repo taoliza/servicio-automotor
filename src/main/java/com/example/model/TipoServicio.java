@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.model;
 
 public enum TipoServicio {
     LAVADO_BASICO,
