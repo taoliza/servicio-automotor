@@ -9,8 +9,8 @@ public class ValidadorEmailTest {
     @Test
     public void testEmailValido() {
         assertTrue(ValidadorEmail.validar("usuario@example.com")); // Email válido
-        assertTrue(ValidadorEmail.validar("usuario+alias@example.com")); // Email con alias válido
-        assertTrue(ValidadorEmail.validar("usuario.name@example.com")); // Email con punto válido
+        assertTrue(ValidadorEmail.validar("usuario+alias@example.com"));
+        assertTrue(ValidadorEmail.validar("usuario.name@example.com"));
     }
 
     @Test

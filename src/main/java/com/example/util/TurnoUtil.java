@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class TurnoUtil {
     public static Turno crearTurno(LocalDateTime fechaHora, String patenteVehiculo, Cliente cliente, TipoServicio tipoServicio){
         double precio = calcularPrecio(cliente, tipoServicio);
-        return new Turno(fechaHora, patenteVehiculo, cliente.getEmail(), tipoServicio, precio);
+        return new Turno(fechaHora,tipoServicio,patenteVehiculo, cliente, precio);
     }
     private static double calcularPrecio(Cliente cliente, TipoServicio tipoServicio){
         if(cliente.tieneServicioGratis()) return 0;

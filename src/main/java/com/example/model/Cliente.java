@@ -1,39 +1,34 @@
 package com.example.model;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+@Data
+@NoArgsConstructor
+@Entity
 public class Cliente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NonNull
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @NonNull
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private int contadorServicios;
 
-    public Cliente(String email, String nombre) {
+    public Cliente(@NonNull String email, @NonNull String nombre) {
         this.email = email;
         this.nombre = nombre;
         this.contadorServicios = 0;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getContadorServicios() {
-        return contadorServicios;
-    }
-
-    public void setContadorServicios(int contador) {
-        this.contadorServicios = contador;
     }
 
     public void incrementarContadorServicios(){
