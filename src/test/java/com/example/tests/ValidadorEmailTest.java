@@ -1,9 +1,13 @@
 package com.example.tests;
 
-import com.example.util.ValidadorEmail;
+import com.example.util.validator.ValidadorEmail;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 public class ValidadorEmailTest {
 
     @Test

@@ -39,3 +39,5 @@ build/
 
 # Ignorar archivos de H2 (base de datos en memoria)
 *.h2.db
+*.mv.db
+*.trace.db

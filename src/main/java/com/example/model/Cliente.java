@@ -22,12 +22,18 @@ public class Cliente {
     @Column(nullable = false)
     private String nombre;
 
+    @NonNull
+    @Column(nullable=false)
+    private String numeroTelefono;
+
     @Column(nullable = false)
     private int contadorServicios;
 
-    public Cliente(@NonNull String email, @NonNull String nombre) {
+
+    public Cliente(@NonNull String email, @NonNull String nombre, @NonNull String numeroTelefono) {
         this.email = email;
         this.nombre = nombre;
+        this.numeroTelefono = numeroTelefono;
         this.contadorServicios = 0;
     }
 
@@ -38,5 +44,8 @@ public class Cliente {
     public boolean tieneServicioGratis(){
         return this.contadorServicios == 6; // Si tiene 6 (más de 5), el septimo es gratis
     }
+
+
+
 
 }

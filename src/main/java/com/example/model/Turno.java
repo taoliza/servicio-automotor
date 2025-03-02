@@ -20,28 +20,26 @@ public class Turno {
     private LocalDateTime fechaHora;
 
     @NonNull
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoServicio tipoServicio;
+    Long tipoServicio;
 
     @NonNull
     @Column(nullable = false)
     private String patenteVehiculo;
 
     @NonNull
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
+    @Column(nullable = false)
+    private String emailCliente;
 
     @Column(nullable = false)
     private double precio;
 
 
-    public Turno(@NonNull LocalDateTime fechaHora, @NonNull TipoServicio tipoServicio, @NonNull String patenteVehiculo, @NonNull Cliente cliente, double precio) {
+    public Turno(@NonNull LocalDateTime fechaHora, @NonNull Long tipoServicio, @NonNull String patenteVehiculo, @NonNull String emailCliente, double precio) {
         this.fechaHora = fechaHora;
         this.tipoServicio = tipoServicio;
         this.patenteVehiculo = patenteVehiculo;
-        this.cliente = cliente;
+        this.emailCliente = emailCliente;
         this.precio = precio;
     }
 }
