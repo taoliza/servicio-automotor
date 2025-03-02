@@ -1,0 +1,26 @@
+.turno-actual {
+    margin-bottom: 2rem;
+  }
+  
+  .turno-actual h2 {
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+  
+  .turno-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .turno-header h3 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .turno-body p {
+    margin: 0.5rem 0;
+    color: #555;
+  }

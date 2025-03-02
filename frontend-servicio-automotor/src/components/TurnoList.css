@@ -1,0 +1,130 @@
+.turnos-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.header-container {
+    display: flex;
+    justify-content: flex-end; /* Alinea el botón a la derecha */
+    margin-bottom: 20px;
+}
+
+.agendar-btn {
+    background-color: #28a745; /* Verde para un botón de acción positivo */
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Más espacio para un botón más grande */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.agendar-btn:hover {
+    background-color: #218838; /* Verde más oscuro cuando se pasa el ratón */
+    transform: scale(1.05); /* Le da un pequeño efecto de expansión */
+}
+
+.agendar-btn:focus {
+    outline: none; /* Elimina el borde azul cuando se hace clic */
+}
+  
+  .header-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .header-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .turnos-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .turno-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .turno-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .turno-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .turno-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333333;
+  }
+  
+  .turno-body p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #555555;
+  }
+  
+  .turno-body strong {
+    color: #333333;
+  }
+  
+  /* Estilos para el Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: red;
+  }
