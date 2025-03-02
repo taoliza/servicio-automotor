@@ -37,50 +37,39 @@ public class AgendaServiceTest {
 
     @Test
     public void testGenerarFechasDisponibles() {
-        // Configurar mocks
         when(configuracionHorarios.getHorariosPorDia(any(DayOfWeek.class))).thenReturn(Arrays.asList(LocalTime.of(9, 0), LocalTime.of(12, 0)));
         when(turnoService.obtenerAgendaTurnos()).thenReturn(Collections.emptyList());
 
-        // Ejecutar método
         List<LocalDate> fechasDisponibles = agendaService.generarFechasDisponibles();
 
-        // Verificaciones
         assertNotNull(fechasDisponibles);
         assertEquals(14, fechasDisponibles.size()); // 14 días, todos disponibles
     }
 
     @Test
     public void testGenerarFechasDisponibles_TodosLosHorariosOcupados() {
-        // Configurar mocks
         LocalDate fechaFija = LocalDate.of(2023, 10, 2); // Lunes 2 de octubre de 2023
         when(configuracionHorarios.getHorariosPorDia(any(DayOfWeek.class))).thenReturn(Arrays.asList(LocalTime.of(9, 0), LocalTime.of(12, 0)));
 
-        // Crear un turno ocupado
         Turno turnoOcupado = new Turno(LocalDateTime.of(fechaFija, LocalTime.of(9, 0)), 1L, "ABC123", "cliente@example.com", 100);
         when(turnoService.obtenerAgendaTurnos()).thenReturn(List.of(turnoOcupado));
 
-        // Ejecutar método
         List<LocalDate> fechasDisponibles = agendaService.generarFechasDisponibles();
 
-        // Verificaciones
         assertNotNull(fechasDisponibles);
         assertFalse(fechasDisponibles.contains(fechaFija)); // La fecha fija no debe estar disponible
     }
 
     @Test
     public void testGenerarHorariosDisponibles() {
-        // Configurar mocks
         LocalDate fechaFija = LocalDate.of(2023, 10, 2); // Lunes 2 de octubre de 2023
         when(configuracionHorarios.getHorariosPorDia(fechaFija.getDayOfWeek())).thenReturn(Arrays.asList(LocalTime.of(9, 0), LocalTime.of(12, 0)));
 
-        // Crear un turno ocupado
         Turno turnoOcupado = new Turno(LocalDateTime.of(fechaFija, LocalTime.of(9, 0)), 1L, "ABC123", "cliente@example.com", 100);
         when(turnoService.obtenerAgendaTurnos()).thenReturn(List.of(turnoOcupado));
 
-        // Ejecutar método
         List<LocalTime> horariosDisponibles = agendaService.generarHorariosDisponibles(fechaFija);
 
-        // Verificaciones
         assertEquals(1, horariosDisponibles.size()); // Solo el horario de 12:00 está disponible
         assertFalse(horariosDisponibles.contains(LocalTime.of(9, 0))); // El horario de 9:00 está ocupado
         assertTrue(horariosDisponibles.contains(LocalTime.of(12, 0))); // El horario de 12:00 está disponible
