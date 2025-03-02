@@ -35,7 +35,7 @@ public class ClienteController {
         return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping("/email")
+    @GetMapping("/buscar-por-email")
     public ResponseEntity<Cliente> obtenerClientePorEmail(@RequestParam String email) {
         Optional<Cliente> cliente = clienteService.obtenerClientePorEmail(email);
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

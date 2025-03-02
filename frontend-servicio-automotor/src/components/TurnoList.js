@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { formatearFecha, formatearHora } from "../util";
-import TurnoForm from "./TurnoForm"; // Importa el formulario de agendar turno
-import Modal from "./Modal"; // Importa el componente Modal
-import "./TurnoList.css"; // Importamos el archivo CSS para estilos
+import TurnoForm from "./TurnoForm"; 
+import Modal from "./Modal";
+import "./TurnoList.css"; 
 
 const TurnosList = ({ apiEndpoint, titulo, limite }) => {
   const [turnos, setTurnos] = useState([]);
@@ -22,7 +22,7 @@ const TurnosList = ({ apiEndpoint, titulo, limite }) => {
             try {
               // Petición para obtener el cliente por email
               const clienteResponse = await axios.get(
-                `http://localhost:8080/clientes?email=${turno.emailCliente}`
+                `http://localhost:8080/clientes/buscar-por-email?email=${turno.emailCliente}`
               );
 
               // Petición para obtener el nombre del servicio por ID
@@ -32,7 +32,7 @@ const TurnosList = ({ apiEndpoint, titulo, limite }) => {
 
               return {
                 ...turno,
-                nombreCliente: clienteResponse.data[0].nombre || "Desconocido",
+                nombreCliente: clienteResponse.data.nombre || "Desconocido",
                 nombreServicio: servicioResponse.data.nombre || "Sin especificar",
               };
             } catch (error) {
@@ -71,9 +71,45 @@ const TurnosList = ({ apiEndpoint, titulo, limite }) => {
     }
   };
 
-  const handleTurnoRegistrado = (nuevoTurno) => {
-    setTurnos([nuevoTurno, ...turnos]); // Agrega el nuevo turno al principio de la lista
-    setModalAgendarVisible(false); // Cierra el modal de agendar turno
+  const handleTurnoRegistrado = async (nuevoTurno) => {
+    try {
+      // Recargar los turnos desde el servidor
+      const response = await axios.get(apiEndpoint);
+      const turnosData = response.data;
+  
+      const turnosConDetalles = await Promise.all(
+        turnosData.map(async (turno) => {
+          try {
+            const clienteResponse = await axios.get(
+              `http://localhost:8080/clientes/buscar-por-email?email=${turno.emailCliente}`
+            );
+            const servicioResponse = await axios.get(
+              `http://localhost:8080/servicios/${turno.tipoServicio}`
+            );
+  
+            return {
+              ...turno,
+              nombreCliente: clienteResponse.data.nombre || "Desconocido",
+              nombreServicio: servicioResponse.data.nombre || "Sin especificar",
+            };
+          } catch (error) {
+            console.error("Error obteniendo datos:", error);
+            return {
+              ...turno,
+              nombreCliente: "Desconocido",
+              nombreServicio: "Sin especificar",
+            };
+          }
+        })
+      );
+  
+      setTurnos(limite ? turnosConDetalles.slice(0, limite) : turnosConDetalles);
+    } catch (error) {
+      console.error("Error recargando turnos:", error);
+    }
+  
+    // Cerrar el modal de agendar turno
+    setModalAgendarVisible(false);
   };
 
   return (
