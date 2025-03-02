@@ -61,11 +61,7 @@ public class ClienteService {
 
     //Acá tuve un problema asi que lo decidi filtrar manualmente
     public Optional<Cliente> obtenerClientePorEmail(String email) {
-        // Obtener todos los clientes del repositorio
-        List<Cliente> clientes = clienteRepository.findAll();
-        return clientes.stream()
-                .filter(cliente -> email.equals(cliente.getEmail()))
-                .findFirst();
+        return clienteRepository.findByEmail(email);
     }
 
     public boolean incrementarContadorServicios(String email) {
